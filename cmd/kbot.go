@@ -10,12 +10,17 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	telebot "gopkg.in/telebot.v3"
+	tele "gopkg.in/telebot.v3"
 )
 
 var (
 	// Telegram bot token
-	TeleBotToken = os.Getenv("TELEBOT_TOKEN")
+	TeleBotToken = os.Getenv("TELEGRAM_BOT_TOKEN")
+	menu         = &tele.ReplyMarkup{ResizeKeyboard: true}
+	apple        = menu.Text("apple")
+	car          = menu.Text("car")
+	flower       = menu.Text("flower")
+	bird         = menu.Text("bird")
 )
 
 // kbotCmd represents the kbot command
@@ -30,34 +35,82 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("kbot %s stated", appVersion)
-		sett := telebot.Settings{
+		fmt.Printf("bot %s started", appVersion)
+		sett := tele.Settings{
 			URL:    "",
-			Token:  os.Getenv("TELEBOT_TOKEN"),
-			Poller: &telebot.LongPoller{Timeout: 10 * time.Second},
+			Token:  os.Getenv("TELEGRAM_BOT_TOKEN"),
+			Poller: &tele.LongPoller{Timeout: 10 * time.Second},
 		}
 
-		kbot, err := telebot.NewBot(sett)
+		bot, err := tele.NewBot(sett)
 		if err != nil {
-			log.Fatalf("Check check TELEBOT_TOKEN env. %s", err)
+			log.Fatalf("Check TELEGRAM_BOT_TOKEN env. %s", err)
 			return
 		}
 
-		kbot.Handle(telebot.OnText, func(ctx telebot.Context) error {
+		menu.Reply(
+			menu.Row(apple, car),
+			menu.Row(flower, bird),
+		)
 
-			log.Print(ctx.Message().Payload, ctx.Text())
-
-			switch ctx.Text() {
-				case "hello":
-					return ctx.Send(fmt.Printf("This is kbot version - %s", appVersion))
-					return ctx.Send(fmt.Sprintf("This is kbot version - %s", appVersion))
-
-			}
-			return err
-
+		bot.Handle(tele.OnMyChatMember, func(ctx tele.Context) error {
+			ctx.Send("Hi! 👋")
+			return ctx.Send("Push a button to show picture", menu)
 		})
 
-		kbot.Start()
+		dir, err := os.Getwd()
+
+		apple_pic := &tele.Photo{File: tele.FromDisk(fmt.Sprintf("%s/.img/apple.jpeg", dir))}
+		car_pic := &tele.Photo{File: tele.FromDisk(fmt.Sprintf("%s/.img/car.jpeg", dir))}
+		flower_pic := &tele.Photo{File: tele.FromDisk(fmt.Sprintf("%s/.img/flower.jpeg", dir))}
+		bird_pic := &tele.Photo{File: tele.FromDisk(fmt.Sprintf("%s/.img/bird.jpeg", dir))}
+
+		bot.Handle(tele.OnText, func(ctx tele.Context) error {
+			switch ctx.Text() {
+			case "apple":
+				_, err := bot.SendAlbum(ctx.Sender(), tele.Album{apple_pic})
+				if err != nil {
+					return err
+				}
+				return nil
+			case "car":
+				_, err := bot.SendAlbum(ctx.Sender(), tele.Album{car_pic})
+				if err != nil {
+					return err
+				}
+				return nil
+			case "flower":
+				_, err := bot.SendAlbum(ctx.Sender(), tele.Album{flower_pic})
+				if err != nil {
+					return err
+				}
+				return nil
+			case "bird":
+				_, err := bot.SendAlbum(ctx.Sender(), tele.Album{bird_pic})
+				if err != nil {
+					return err
+				}
+				return nil
+
+			}
+
+			return err
+		})
+
+		// bot.Handle(tele.OnText, func(ctx tele.Context) error {
+
+		// 	log.Print(ctx.Message().Payload, ctx.Text())
+
+		// 	switch ctx.Text() {
+		// 	case "hello":
+		// 		return ctx.Send(fmt.Sprintf("This is kbot version - %s", appVersion))
+
+		// 	}
+		// 	return err
+
+		// })
+
+		bot.Start()
 	},
 }
 
