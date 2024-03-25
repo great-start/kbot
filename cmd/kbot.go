@@ -15,7 +15,7 @@ import (
 
 var (
 	// Telegram bot token
-	TeleBotToken = os.Getenv("TELEGRAM_BOT_TOKEN")
+	TeleBotToken = os.Getenv("TELE_TOKEN")
 	menu         = &tele.ReplyMarkup{ResizeKeyboard: true}
 	apple        = menu.Text("apple")
 	car          = menu.Text("car")
@@ -38,13 +38,13 @@ to quickly create a Cobra application.`,
 		fmt.Printf("bot %s started", appVersion)
 		sett := tele.Settings{
 			URL:    "",
-			Token:  os.Getenv("TELEGRAM_BOT_TOKEN"),
+			Token:  os.Getenv("TELE_TOKEN"),
 			Poller: &tele.LongPoller{Timeout: 10 * time.Second},
 		}
 
 		bot, err := tele.NewBot(sett)
 		if err != nil {
-			log.Fatalf("Check TELEGRAM_BOT_TOKEN env. %s", err)
+			log.Fatalf("Check TELE_TOKEN env. %s", err)
 			return
 		}
 
@@ -96,19 +96,6 @@ to quickly create a Cobra application.`,
 
 			return err
 		})
-
-		// bot.Handle(tele.OnText, func(ctx tele.Context) error {
-
-		// 	log.Print(ctx.Message().Payload, ctx.Text())
-
-		// 	switch ctx.Text() {
-		// 	case "hello":
-		// 		return ctx.Send(fmt.Sprintf("This is kbot version - %s", appVersion))
-
-		// 	}
-		// 	return err
-
-		// })
 
 		bot.Start()
 	},
