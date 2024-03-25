@@ -1,19 +1,28 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"time"
 
 	"github.com/spf13/cobra"
+	telebot "gopkg.in/telebot.v3"
+)
+
+var (
+	// Telegram bot token
+	TeleBotToken = os.Getenv("TELEBOT_TOKEN")
 )
 
 // kbotCmd represents the kbot command
 var kbotCmd = &cobra.Command{
-	Use:   "kbot",
-	Short: "A brief description of your command",
+	Use:     "kbot",
+	Aliases: []string{"start"},
+	Short:   "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -21,7 +30,34 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("kbot called")
+		fmt.Printf("kbot %s stated", appVersion)
+		sett := telebot.Settings{
+			URL:    "",
+			Token:  os.Getenv("TELEBOT_TOKEN"),
+			Poller: &telebot.LongPoller{Timeout: 10 * time.Second},
+		}
+
+		kbot, err := telebot.NewBot(sett)
+		if err != nil {
+			log.Fatalf("Check check TELEBOT_TOKEN env. %s", err)
+			return
+		}
+
+		kbot.Handle(telebot.OnText, func(ctx telebot.Context) error {
+
+			log.Print(ctx.Message().Payload, ctx.Text())
+
+			switch ctx.Text() {
+				case "hello":
+					return ctx.Send(fmt.Printf("This is kbot version - %s", appVersion))
+					return ctx.Send(fmt.Sprintf("This is kbot version - %s", appVersion))
+
+			}
+			return err
+
+		})
+
+		kbot.Start()
 	},
 }
 
