@@ -24,7 +24,7 @@ git clone https://github.com/great-start/kbot.git
 ### Setting up environment
 
 ```bash
-$ export TELEGRAM_BOT_TOKEN=<bot_token>
+export TELEGRAM_BOT_TOKEN=<bot_token>
 ```
 
 ### Install dependecies & Build
