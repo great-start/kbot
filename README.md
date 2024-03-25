@@ -1,23 +1,21 @@
 <p align="center">
-  <h3 align="center">Telegram bot</p>
+  <h2 align="center">Telegram bot</p>
 </p>
 
-<p align="center">Telegram bot that returns particular pictures after pressing a button</p>
+<p align="center">Bot returns particular pictures after pressing a buttons</p>
 
-#### [Telegram link](https://t.me/ev_bill_kbot)
+#### [TelegramBot link](https://t.me/ev_bill_kbot)
 
-### Description
-
-Telegram bot that returns particular pictures after pressing a button
+---
 
 ### Technologies
 
 - Golang (v1.22.1)
 - Telebot (gopkg.in/telebot.v3)
 
-## Getting started
-
 ---
+
+## Getting started
 
 ### Clone repository
 
