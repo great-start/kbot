@@ -13,8 +13,6 @@
 
 ---
 
----
-
 ## Getting started
 
 ### Clone repository
