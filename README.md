@@ -18,13 +18,7 @@
 ### Clone repository
 
 ```bash
-$ git clone https://github.com/great-start/kbot.git
-```
-
-### Install dependencies
-
-```bash
-$ go get
+git clone https://github.com/great-start/kbot.git
 ```
 
 ### Setting up environment
@@ -33,9 +27,14 @@ $ go get
 $ export TELEGRAM_BOT_TOKEN=<bot_token>
 ```
 
-### Build & Start bot
+### Install dependecies & Build
 
 ```bash
-$ go build -ldflags "-X=github.com/great-start/kbot/cmd.appVersion=v1.0.3"
-$ ./kbot start
+go build -ldflags "-X=github.com/great-start/kbot/cmd.appVersion=v1.0.3"
+```
+
+### Start bot
+
+```bash
+./kbot start
 ```
