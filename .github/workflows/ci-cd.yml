@@ -40,12 +40,35 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
+      - name: Build & push image
         run: |
           make image
           make push
 
-  # cd:
-  #   name: CD
-  #   needs: ci
-  #   runs-on: ubuntu-latest
+  cd:
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set env
+        run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GIHUB_ENV
+
+      - name: update helm values
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            yq -i '.image.tag=strenv(VERSION)' helm/values.yaml
+            yq -i '.image.os=linux' helm/values.yaml
+            yq -i '.image.registry=ghcr.io' helm/values.yaml
+
+      - name: update image tag
+        uses: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "update version $VERSION"
+          git push
