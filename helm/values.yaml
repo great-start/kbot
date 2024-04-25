@@ -7,9 +7,9 @@ image:
   registry: ghcr.io
   repository: great-start
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.3-f71b497"
-  os: "linux"
-  arch: "arm64"
+  tag: "v1.0.3-9822727"
+  os: ""
+  arch: ""
 secret:
   name: kbot
   env: TELE_TOKEN
