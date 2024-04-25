@@ -7,7 +7,7 @@ image:
   registry: ghcr.io
   repository: great-start
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.3-13dde49"
+  tag: "v1.0.3-10621bd"
   os: ""
   arch: ""
 secret:
