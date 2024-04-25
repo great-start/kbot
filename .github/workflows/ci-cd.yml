@@ -1,0 +1,47 @@
+name: kbot-CICD
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependensies
+        run: make install
+
+      - name: Format
+        run: make format
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v5
+        with:
+          version: v1.57
+
+      - name: Test
+        run: make test
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        run: |
+          make build
+          make push
+
+  # cd:
+  #   name: CD
+  #   needs: ci
+  #   runs-on: ubuntu-latest
