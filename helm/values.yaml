@@ -9,7 +9,7 @@ image:
   repository: great-start
   # Overrides the image tag whose default is the chart appVersion.
   tag: v1.0.3-5cc7546
-  os: linux
+  os: asdasd
   arch: amd64
 secret:
   name: kbot

@@ -67,7 +67,7 @@ jobs:
             yq -i '.image.registry=ghcr.io' helm/values.yaml
 
       - name: update image tag
-        uses: |
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git commit -am "update version $VERSION"
