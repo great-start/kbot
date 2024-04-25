@@ -38,7 +38,7 @@ jobs:
 
       - name: Build image
         run: |
-          make build
+          make image
           make push
 
   # cd:
