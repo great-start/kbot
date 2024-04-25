@@ -37,7 +37,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
-        run: make image
+        run: |
+          make image
           make push
 
   # cd:
