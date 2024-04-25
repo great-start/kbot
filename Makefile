@@ -7,7 +7,7 @@ VERSION=${shell git describe --tags --abbrev=0}-${shell git rev-parse --short HE
 #linux darwin windows
 TARGETOS=linux
 #amd64
-TARGETARCH=arm64
+TARGETARCH=amd64
 
 # устанвока зависимостей
 install:
