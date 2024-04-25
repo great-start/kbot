@@ -20,7 +20,9 @@ jobs:
         run: make format
 
       - name: Lint
-        run: make lint
+        uses: golangci/golangci-lint-action@v5
+        with:
+          version: v1.57
 
       - name: Test
         run: make test
