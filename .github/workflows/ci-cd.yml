@@ -8,6 +8,10 @@ jobs:
   ci:
     name: CI
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      packages: write
 
     steps:
       - name: Checkout
@@ -38,7 +42,7 @@ jobs:
 
       - name: Build image
         run: |
-          make build
+          make image
           make push
 
   # cd:

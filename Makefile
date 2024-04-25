@@ -28,10 +28,10 @@ build: install format
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X=github.com/{REPO_OWNER}/kbot/cmd.appVersion=${VERSION}"
 
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker buildx build . -t ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETARCH}
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker push ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETARCH}
 
 # удаления сгенерированных артефактов сборки или временных файлов, чтобы очистить рабочее окружение перед повторной сборкой
 clean:
