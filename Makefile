@@ -1,7 +1,8 @@
 # shell - это выполнение команды в оболочке bash/sh в UNIX системах
 # APP=$(shell basename ${shell git remote get-url origin})
 APP= $(shell basename ${PWD})
-REGISTRY=evgenbill
+REGISTRY=ghcr.io
+REPO_OWNER=great-start
 VERSION=${shell git describe --tags --abbrev=0}-${shell git rev-parse --short HEAD}
 TARGETOS=linux #linux darwin windows
 TARGETARCH=arm64 #amd64
@@ -24,7 +25,7 @@ test:
 
 # build (но перед этим выполняет install и format)
 build: install format
-	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X=github.com/great-start/kbot/cmd.appVersion=${VERSION}"
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X=github.com/{REPO_OWNER}/kbot/cmd.appVersion=${VERSION}"
 
 image:
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
