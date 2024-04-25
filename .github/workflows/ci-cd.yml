@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GIHUB_ENV
+      - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" > $GIHUB_ENV
 
       - name: update helm values
         uses: mikefarah/yq@master
