@@ -60,9 +60,9 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |
-            yq -i '.image.tag=strenv($VERSION)' helm/values.yaml
-            yq -i '.image.os=strenv($TARGETOS)' helm/values.yaml
-            yq -i '.image.arch=strenv($TARGETARCH)' helm/values.yaml
+            yq -i '.image.tag=strenv(VERSION)' helm/values.yaml
+            yq -i '.image.os=strenv(TARGETOS)' helm/values.yaml
+            yq -i '.image.arch=strenv(TARGETARCH)' helm/values.yaml
             yq -i '.image.registry="ghcr.io"' helm/values.yaml
 
       - name: update image tag
