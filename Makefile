@@ -31,7 +31,7 @@ build: install format
 
 image:
 	echo ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
-	docker buildx build . -t ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker buildx build . -t ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push:
 	docker push ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
