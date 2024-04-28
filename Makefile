@@ -6,7 +6,7 @@ REPO_OWNER=great-start
 VERSION=${shell git describe --tags --abbrev=0}-${shell git rev-parse --short HEAD}
 #linux darwin windows
 TARGETOS=linux
-#amd64
+#amd64 aarch64 ARMv7 i386
 TARGETARCH=amd64
 
 # устанвока зависимостей
