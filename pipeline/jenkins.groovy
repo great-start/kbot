@@ -22,7 +22,7 @@ pipeline {
         stage('test') {
             steps {
                 echo "Test"
-                bash "make test"
+                sh "make test"
             }
         }
         
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo "Build for platform ${params.OS}"
                 echo "Build for arch: ${params.ARCH}"
-                bash "make TARGETOS=${params.OS} TARGETARCH=${params.ARCH} build"
+                sh "make TARGETOS=${params.OS} TARGETARCH=${params.ARCH} build"
             }
         }
     }
