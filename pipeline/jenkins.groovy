@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         REPO = "https://github.com/great-start/kbot.git"
-        BRANCH = "main"
+        BRANCH = "develop"
     }
     parameters {
 
