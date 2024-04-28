@@ -15,8 +15,14 @@ pipeline {
         stage('clone') {
             steps {
                 echo "Clone repo"
-                git branch 
-                bash "make"
+                git branch: "${BRANCH}", url: "${REPO}" 
+            }
+        }
+
+        stage('test') {
+            steps {
+                echo "Test"
+                bash "make test"
             }
         }
         
@@ -24,7 +30,7 @@ pipeline {
             steps {
                 echo "Build for platform ${params.OS}"
                 echo "Build for arch: ${params.ARCH}"
-                bash "make"
+                bash "make TARGETOS=${params.OS} TARGETARCH=${params.ARCH} build"
             }
         }
     }
