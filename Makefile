@@ -4,10 +4,10 @@ APP=$(shell basename ${PWD})
 REGISTRY=ghcr.io
 REPO_OWNER=great-start
 VERSION=${shell git describe --tags --abbrev=0}-${shell git rev-parse --short HEAD}
-#linux darwin windows
-TARGETOS=${TARGETOS}
-#amd64 aarch64 ARMv7 i386
-TARGETARCH=${TARGETARCH}
+# aix	android darwin dragonfly freebsd hurd illumos ios js linux nacl netbsd openbsd plan9 solaris windows zos
+TARGETOS ?= linux
+# amd64 arm64 arm64be loong64 mips64 mips64le ppc64 ppc64le riscv64 s390x sparc64 wasm 386
+TARGETARCH ?= amd64
 
 # устанвока зависимостей
 install:
