@@ -55,9 +55,9 @@ to quickly create a Cobra application.`,
 
 		bot.Handle(tele.OnMyChatMember, func(ctx tele.Context) error {
 			// ctx.Send("Hi! 👋")
-			    if err := ctx.Send("Hi! 👋"); err != nil {
-        return err
-    }
+			if err := ctx.Send("Hi! 👋"); err != nil {
+				return err
+			}
 			return ctx.Send("Push a button to show picture", menu)
 		})
 
