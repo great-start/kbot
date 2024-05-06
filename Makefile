@@ -30,7 +30,6 @@ build: install format
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X=github.com/{REPO_OWNER}/kbot/cmd.appVersion=${VERSION}"
 
 image:
-	echo ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 	docker buildx build . -t ${REGISTRY}/${REPO_OWNER}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push:

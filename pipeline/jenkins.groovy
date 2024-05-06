@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('format') {
             steps {
                 echo "Test"
                 sh "make test"
