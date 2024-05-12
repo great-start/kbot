@@ -13,7 +13,7 @@ image:
 secret:
   name: kbot
   env: TELE_TOKEN
-  key: token
+  key: tokens
 securityContext:
   privileged: true
 # imagePullSecrets: []
@@ -33,7 +33,7 @@ serviceAccount:
 # podLabels: {}
 # podSecurityContext: {}
 # fsGroup: 2000
-# 
+#
 # securityContext: {}
 # capabilities:
 #   drop:
