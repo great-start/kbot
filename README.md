@@ -1,40 +1,30 @@
-<h2 align="center">Telegram bot</h2>
+<h2 align="center">Gitleaks pre-commit hook</h2>
 
-<h3 align="center">Bot returns particular pictures after pressing a buttons</h3>
+### Використання pre-commit хука з gitleaks з локальною інсталяцією gitleaks (curl)
 
----
+### Встановлення та використання
 
-#### [TelegramBot link](https://t.me/ev_bill_kbot)
-
-### Technologies
-
-- Golang (v1.22.1)
-- Telebot (gopkg.in/telebot.v3)
-
----
-
-## Getting started
-
-### Clone repository
+1. Увімкніть pre-commit:
 
 ```bash
-git clone https://github.com/great-start/kbot.git
+$ git config hooks.pre-commit.enable true
 ```
 
-### Setting up environment
+2. Перенести скрипт до хуків git
 
 ```bash
-export TELE_TOKEN=<bot_token>
+$ cp hooks/pre-commit .git/hooks/pre-commit
 ```
 
-### Install dependecies & Build
+4. Внести зміни до коду і перевірити використання
 
 ```bash
-go build -ldflags "-X=github.com/great-start/kbot/cmd.appVersion=v1.0.3"
+$ git add .
+$ git commit -m "test"
 ```
 
-### Start bot
+1. Вимкнення pre-commit хука:
 
 ```bash
-./kbot start
+ $ git config hooks.pre-commit.enable false
 ```
