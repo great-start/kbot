@@ -4,13 +4,13 @@
 
 ### Встановлення та використання
 
-1. Увімкніть pre-commit:
+1. Увімкніть pre-commit хук:
 
 ```bash
 $ git config hooks.pre-commit.enable true
 ```
 
-2. Перенести скрипт до хуків git
+2. Pre-commit хук знаходиться у папці hooks. Перенести скрипт до хуків git, або виконати команду:
 
 ```bash
 $ cp hooks/pre-commit .git/hooks/pre-commit
