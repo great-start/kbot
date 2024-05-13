@@ -41,4 +41,4 @@ if [ "$GITLEAKS_INSTALLED" = false ]; then
 fi
 
 # exec pre-commit
-exec gitleaks detect --source . --verbose
+exec gitleaks detect --source . --verbose --no-git
