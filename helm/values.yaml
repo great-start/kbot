@@ -13,7 +13,7 @@ image:
 secret:
   name: kbot
   env: TELE_TOKEN
-  key: tokensasd
+  key: token
 securityContext:
   privileged: true
 # imagePullSecrets: []
