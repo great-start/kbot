@@ -16,7 +16,7 @@ $ git config hooks.pre-commit.enable true
 $ cp hooks/pre-commit .git/hooks/pre-commit
 ```
 
-4. Внести зміни до коду і перевірити використання
+4. Внести зміни до коду і перевірити використання. Може буди необхідним root права для встановлення gitleaks при першому використанні
 
 ```bash
 $ git add .
